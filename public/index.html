@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoneLink</title>
+  <link rel="stylesheet" href="/styles.css" />
+
+  <link rel="icon" type="image/png" href="/icon.png">
+
+  <link rel="apple-touch-icon" href="/icon.png">
+</head>
+
+<div id="previewModal" class="modal" hidden>
+  <button class="close" type="button">&times;</button>
+  <img class="modal-content" id="previewImg" alt="Preview">
+</div>
+
+<body>
+  <header class="topbar">
+    <h1>
+      <a href="/" class="logo-link">
+        <img src="/icon.png" class="logo-img" alt="LoneLink">
+        <span>LoneLink</span>
+
+
+      </a>
+    </h1>
+    <!-- <h1 class="logo">
+      <a href="/" class="logo-link">
+        <img src="/icon.png" class="logo-img" alt="LoneLink">
+        <span>LoneLink</span>
+      </a>
+    </h1> -->
+    <div class="topbar-actions">
+      <a href="/about.html" class="nav-link">About</a>
+
+      <span id="status" class="status"></span>
+      <form action="/logout" method="POST" id="logout-form" hidden>
+        <button type="submit" class="btn-link">Log out</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 
+    <section class="card" id="pins-card" hidden>
+      <h2>📌 Pinned Posts</h2>
+      <ul id="pins-list" class="list pins-list"></ul>
+      <p class="hint">Drop files or text here to pin them.</p>
+    </section>
+ -->
+
+
+    <!-- PINS (LEFT COLUMN) -->
+    <section class="card pins-card" id="pins-card" hidden>
+      <h2>Pinned Posts</h2>
+
+      <div class="pin-drop-hint">
+        Drag files or text here to pin them
+      </div>
+
+      <ul id="pins-list" class="list pins-list"></ul>
+    </section>
+    <!-- Files -->
+    <section class="card" id="files-card">
+      <h2>Files</h2>
+
+      <div id="dropzone" class="dropzone">
+        <p class="dropzone-title"><strong>Drop files here</strong> or</p>
+        <label class="btn primary">
+          Choose files
+          <input type="file" id="file-input" multiple hidden />
+        </label>
+        <p class="hint" id="size-hint">Max upload size: …</p>
+      </div>
+
+      <div id="upload-progress" class="progress" hidden>
+        <div class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+        <p id="progress-text"></p>
+      </div>
+
+      <ul id="file-list" class="list"></ul>
+      <p id="files-empty" class="empty">No files yet.</p>
+    </section>
+
+    <!-- Text & Links -->
+    <section class="card" id="texts-card">
+      <h2>Text &amp; Links</h2>
+
+      <form id="text-form" class="text-form">
+        <textarea id="text-input" placeholder="Paste text, a URL, or a code snippet…" rows="4"></textarea>
+        <button type="submit" class="btn primary">Share</button>
+      </form>
+
+      <ul id="text-list" class="list"></ul>
+      <p id="texts-empty" class="empty">No text items yet.</p>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+
+
+  <div id="previewModal" class="modal" hidden>
+    <button class="close" type="button">&times;</button>
+    <img class="modal-content" id="previewImg" alt="Preview">
+  </div>
+  </div>
+</body>
+
+</html>
