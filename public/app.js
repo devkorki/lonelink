@@ -16,6 +16,12 @@
   const progressText = $('#progress-text');
   const statusEl = $('#status');
   const logoutForm = $('#logout-form');
+  const photoModeToggle = $('#photo-mode-toggle');
+  const photoGallery = $('#photo-gallery');
+  const photoGrid = $('#photo-grid');
+  const photoCount = $('#photo-count');
+  const photosEmpty = $('#photos-empty');
+  const photoFileInput = $('#photo-file-input');
 
 
   const pinsCard = $('#pins-card');
@@ -93,6 +99,7 @@
       currentTexts = data.texts || [];
 
       renderFiles(currentFiles);
+      renderPhotoGallery(currentFiles);
       renderTexts(currentTexts);
 
       statusEl.textContent = '';
@@ -176,6 +183,47 @@
       fileList.appendChild(li);
     });
   }
+
+  function renderPhotoGallery(files) {
+    const images = files.filter(file => isImageFile(file.name));
+    photoGrid.innerHTML = '';
+    photoCount.textContent = `${images.length} image${images.length === 1 ? '' : 's'}`;
+    photosEmpty.hidden = images.length > 0;
+
+    images.forEach(file => {
+      const fileUrl = '/files/' + encodeURIComponent(file.name);
+      const safeName = escapeHtml(file.name);
+      const card = document.createElement('article');
+      card.className = 'photo-tile';
+      card.innerHTML = `
+        <img src="${fileUrl}" alt="${safeName}" loading="lazy" data-preview="${fileUrl}">
+        <div class="photo-tile-overlay">
+          <span title="${safeName}">${safeName}</span>
+          <div>
+            <a class="photo-action" href="${fileUrl}" download title="Download">↓</a>
+            <button class="photo-action delete-photo" data-delete-file="${safeName}" title="Delete">×</button>
+          </div>
+        </div>`;
+      photoGrid.appendChild(card);
+    });
+  }
+
+  function setPhotoMode(enabled) {
+    document.body.classList.toggle('photo-mode', enabled);
+    photoGallery.hidden = !enabled;
+    photoModeToggle.setAttribute('aria-pressed', String(enabled));
+    photoModeToggle.textContent = enabled ? 'Exit Photo Mode' : 'Photo Mode';
+    localStorage.setItem('lonelink:photo-mode', enabled ? '1' : '0');
+  }
+
+  photoModeToggle.addEventListener('click', () => {
+    setPhotoMode(!document.body.classList.contains('photo-mode'));
+  });
+
+  photoFileInput.addEventListener('change', () => {
+    if (photoFileInput.files?.length) uploadFiles(photoFileInput.files);
+    photoFileInput.value = '';
+  });
 
   function openPreview(src) {
     const modal = document.getElementById('previewModal');
@@ -629,6 +677,8 @@
 
   // ---- Initial load + light polling so multiple devices stay in sync ----
   renderPins();
+
+  setPhotoMode(localStorage.getItem('lonelink:photo-mode') === '1');
 
   refresh();
   setInterval(refresh, 5000);

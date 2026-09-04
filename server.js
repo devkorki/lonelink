@@ -257,7 +257,12 @@ app.delete('/api/files/:filename', (req, res) => {
 
 // ---------- Startup banner ----------
 function printLanUrls() {
-  const ifaces = os.networkInterfaces();
+  let ifaces = {};
+  try {
+    ifaces = os.networkInterfaces();
+  } catch (err) {
+    console.warn('Could not detect LAN addresses:', err.message);
+  }
   const urls = [];
   Object.values(ifaces).forEach(list => {
     (list || []).forEach(addr => {

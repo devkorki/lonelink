@@ -1,0 +1,38 @@
+#lonelink-edge-drop {
+  all: initial;
+  position: fixed;
+  z-index: 2147483647;
+  top: 0;
+  right: 0;
+  width: 190px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 18px;
+  color: white;
+  background: linear-gradient(270deg, rgba(37, 99, 235, .97), rgba(37, 99, 235, .82));
+  box-shadow: -12px 0 35px rgba(0, 0, 0, .3);
+  font: 600 16px/1.35 system-ui, sans-serif;
+  text-align: center;
+  transform: translateX(110%);
+  transition: transform .18s ease;
+  pointer-events: none;
+}
+
+#lonelink-edge-drop.lonelink-visible {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+#lonelink-edge-drop.lonelink-over {
+  background: linear-gradient(270deg, #16a34a, #22c55e);
+}
+
+#lonelink-edge-drop span {
+  all: initial;
+  display: block;
+  color: inherit;
+  font: inherit;
+}

@@ -1,6 +1,6 @@
 {
   "name": "lan-share",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Local-network file & text sharing app for devices on the same Wi-Fi/LAN.",
   "main": "server.js",
   "scripts": {

@@ -1,0 +1,15 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+body { margin: 0; background: #10131a; color: #eef2ff; }
+main { width: min(520px, calc(100vw - 48px)); margin: 48px auto; }
+.popup main { width: 260px; margin: 0; padding: 18px; }
+h1 { margin: 0 0 8px; font-size: 22px; }
+p { color: #aab2c5; line-height: 1.45; }
+label { display: block; margin: 22px 0 7px; font-weight: 650; }
+input { width: 100%; box-sizing: border-box; padding: 11px 12px; border: 1px solid #374151; border-radius: 8px; background: #171b25; color: inherit; }
+button { margin: 12px 8px 0 0; padding: 9px 14px; border: 0; border-radius: 8px; background: #2563eb; color: white; cursor: pointer; }
+button.secondary { background: #303747; }
+#status { color: #4ade80; }
+.hint { font-size: 13px; }
+.result { min-height: 20px; margin: 14px 0 0; font-size: 13px; }
+.result.success { color: #4ade80; }
+.result.error { color: #fb7185; }

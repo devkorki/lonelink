@@ -34,6 +34,9 @@
       </a>
     </h1> -->
     <div class="topbar-actions">
+      <button id="photo-mode-toggle" class="btn ghost mode-toggle" type="button" aria-pressed="false">
+        Photo Mode
+      </button>
       <a href="/about.html" class="nav-link">About</a>
 
       <span id="status" class="status"></span>
@@ -44,6 +47,21 @@
   </header>
 
   <main class="container">
+
+    <section id="photo-gallery" class="photo-gallery" hidden>
+      <div class="gallery-heading">
+        <div>
+          <h2>Photos</h2>
+          <p id="photo-count" class="hint">0 images</p>
+        </div>
+        <label class="btn primary">
+          Add photos
+          <input type="file" id="photo-file-input" accept="image/*" multiple hidden />
+        </label>
+      </div>
+      <div id="photo-grid" class="photo-grid"></div>
+      <p id="photos-empty" class="empty">No images yet. Upload one to start your gallery.</p>
+    </section>
 
     <!-- 
     <section class="card" id="pins-card" hidden>
@@ -105,11 +123,6 @@
   <script src="/app.js"></script>
 
 
-  <div id="previewModal" class="modal" hidden>
-    <button class="close" type="button">&times;</button>
-    <img class="modal-content" id="previewImg" alt="Preview">
-  </div>
-  </div>
 </body>
 
 </html>
