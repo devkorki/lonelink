@@ -1,92 +1,204 @@
-# lonelink
+# LoneLink
 
-Lonelink is a lightweight application designed for local area network (LAN) data sharing and synchronization. It facilitates seamless communication and file transfer between devices connected to the same local network.
+LoneLink is a lightweight local-network application for sharing files, images, text, links, and code snippets between devices connected to the same Wi-Fi or Ethernet network.
+
+One computer runs the LoneLink server, and other computers, phones, or tablets access it through their web browser. Files remain on the host computer and are not uploaded to an external cloud service.
 
 ## Features
 
-- LAN Discovery: Automatically detects other devices running lonelink on the same network.
-- Secure Sharing: Peer-to-peer data transfer without the need for external cloud servers.
-- Cross-Platform Support: Designed to work across different operating systems within a local network environment.
-- Low Latency: Optimized for high-speed transfers using local bandwidth.
+- Share files between devices on the same local network
+- Share text, links, and code snippets
+- Drag-and-drop multi-file uploads
+- Upload progress and configurable file-size limits
+- Paste clipboard images directly into LoneLink
+- Download and delete shared files
+- Pin important files and text items
+- Optional password protection
+- Automatic interface updates across connected devices
+- Responsive desktop and mobile interface
+- Pinterest-style Photo Mode
+- Chrome, Edge, and Brave browser extension
+- Right-edge image uploading from other websites
+- Right-click **Send image to LoneLink** command
+- Special image detection for websites such as Pinterest and X
 
-## Getting Started
+## Requirements
 
-### Prerequisites
+- Node.js 18 or newer
+- npm
+- Devices connected to the same local network
 
-- Node.js (v16.0.0 or higher)
-- npm or yarn
+## Installation
 
-### Installation
+Clone the repository:
 
-1. Clone the repository:
-   git clone https://github.com
+```bash
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+```
 
-2. Navigate to the project directory:
-   cd lonelink
+Enter the project folder:
 
-3. Install dependencies:
-   npm install
+```bash
+cd YOUR-REPOSITORY
+```
 
-### Running the Application
+Install the dependencies:
 
-To start the development server:
-
-npm run dev
-
-The application will typically be accessible at http://localhost:3000. Ensure other devices on your LAN can reach your local IP address on the specified port.
-
-## Usage
-
-1. Open the application on two or more devices connected to the same Wi-Fi or Ethernet network.
-2. The interface will display available peers discovered on the network.
-3. Select a peer to initiate a connection or share data.
-
-## Photo Mode
-
-Select **Photo Mode** in the top bar to view every uploaded image in a responsive
-masonry gallery. Select an image for a full-screen preview, or use the controls
-on its tile to download or delete it.
-
-## Chrome / Edge / Brave right-edge uploader
-
-The companion unpacked extension is in the `extension` folder.
-
-1. Open the extensions page for your browser:
-   - Chrome: `chrome://extensions`
-   - Edge: `edge://extensions`
-   - Brave: `brave://extensions`
-2. Enable **Developer mode**.
-3. Choose **Load unpacked** and select the project's `extension` folder.
-4. Open the extension's settings and enter the LoneLink LAN address printed in
-   the terminal, for example `http://192.168.2.8:3000`.
-5. Drag an image on any website toward the right edge. Drop it on the blue
-   LoneLink panel to upload it.
-
-On sites with custom image dragging, including Pinterest and X, the extension
-looks beneath overlays and resolves responsive, embedded, and CSS-backed image
-sources. You can also right-click on or over an image and choose
-**Send image to LoneLink**. A green check or red exclamation mark on the
-extension icon reports the result; open the popup for the detailed last status.
-
-Local image files can also be dragged from File Explorer into the edge panel.
-If LoneLink password protection is enabled, open LoneLink and log in before
-using the extension.
-
-After updating the extension files, select **Reload** on the browser's
-extensions page and refresh any website tabs that were already open.
+```bash
+npm install
+```
 
 ## Configuration
 
-Environment variables can be configured in a .env file at the root of the project. Refer to .env.example for available options such as port settings and discovery intervals.
+Copy `.env.example` to `.env`.
 
-## Contributing
+On Windows PowerShell:
 
-Contributions are welcome. Please follow these steps:
+```powershell
+Copy-Item .env.example .env
+```
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Submit a pull request with a detailed description of your changes.
+On macOS or Linux:
 
-## License
+```bash
+cp .env.example .env
+```
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+Available settings include:
+
+```env
+PORT=3000
+SHARE_PASSWORD=
+MAX_UPLOAD_SIZE_MB=500
+```
+
+- `PORT` controls the LoneLink server port.
+- `SHARE_PASSWORD` enables password protection when set.
+- `MAX_UPLOAD_SIZE_MB` controls the maximum size of each uploaded file.
+
+The `.env` file is excluded from Git and should not be committed.
+
+## Running LoneLink
+
+Start the server:
+
+```bash
+npm start
+```
+
+For development, you can also use:
+
+```bash
+npm run dev
+```
+
+LoneLink prints its available addresses in the terminal:
+
+```text
+Local:   http://localhost:3000
+Network: http://192.168.x.x:3000
+```
+
+Open the network address on another device connected to the same Wi-Fi or Ethernet network.
+
+You may need to allow Node.js through Windows Firewall when prompted.
+
+## Using LoneLink
+
+### Sharing files
+
+Drag files into the upload area or select **Choose files**.
+
+Uploaded files are stored locally in the `uploads` folder on the computer running LoneLink.
+
+### Sharing text and links
+
+Enter text, a URL, or a code snippet in the **Text & Links** section and select **Share**.
+
+Text items are stored locally in `data/items.json`.
+
+### Pinned items
+
+Use the pin button to keep important files or text items in the Pinned Posts section.
+
+Pins are saved in the browser's local storage, so different browsers or devices can have different pinned items.
+
+## Photo Mode
+
+Select **Photo Mode** in the top bar to display uploaded images in a responsive masonry gallery.
+
+In Photo Mode, you can:
+
+- Browse uploaded images
+- Open images in a full-screen preview
+- Download images
+- Delete images
+- Upload additional photos
+
+## Chrome, Edge, and Brave extension
+
+The companion browser extension is located in the `extension` folder.
+
+### Installation
+
+Open the extensions page:
+
+- Chrome: `chrome://extensions`
+- Edge: `edge://extensions`
+- Brave: `brave://extensions`
+
+Then:
+
+1. Enable **Developer mode**.
+2. Select **Load unpacked**.
+3. Select the project's `extension` folder.
+4. Open the LoneLink extension settings.
+5. Enter the network address printed by LoneLink, such as `http://192.168.2.8:3000`.
+6. Use **Test connection** to confirm that the extension can reach LoneLink.
+
+### Uploading from websites
+
+Drag an image toward the right edge of the browser window. When the LoneLink panel appears, release the image to upload it.
+
+The extension supports:
+
+- Standard webpage images
+- Responsive images using `srcset`
+- CSS-backed images
+- Blob images
+- Images behind website overlays
+- Pinterest and X image cards
+
+If a website prevents normal dragging, right-click on or over the image and select **Send image to LoneLink**.
+
+A green checkmark on the extension icon indicates success. A red exclamation mark indicates failure. Open the extension popup to see the latest upload result.
+
+After updating the extension files, reload the extension from the browser's extensions page and refresh any existing website tabs.
+
+## Local storage
+
+LoneLink creates these folders automatically:
+
+```text
+uploads/
+data/
+```
+
+They are excluded from Git so uploaded files and shared text are not committed to the repository.
+
+The following local files are also excluded:
+
+```text
+node_modules/
+.env
+*.log
+```
+
+## Security notes
+
+LoneLink is intended for trusted local networks.
+
+- It uses ordinary HTTP by default.
+- Traffic is not end-to-end encrypted.
+- Anyone who can reach the server may access it unless `SHARE_PASSWORD` is configured.
+- Do not expose the LoneLink port directly to the public internet.
